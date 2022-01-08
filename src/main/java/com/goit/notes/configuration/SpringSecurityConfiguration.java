@@ -21,9 +21,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @SneakyThrows
-    @Autowired
-    public void configureGlobal(BCryptPasswordEncoder passwordEncoder, 
-            UserDetailsService userDetailsService, AuthenticationManagerBuilder auth) {
+    public void configureGlobal(BCryptPasswordEncoder passwordEncoder,
+                                UserDetailsService userDetailsService, AuthenticationManagerBuilder auth) {
 
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
 
@@ -34,7 +33,6 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/noteUser/listUsers").access("hasRole('ROLE_ADMIN')");
-
 
         http.authorizeRequests()
                 .antMatchers("/user/register").permitAll()
@@ -51,9 +49,6 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/logout");
-
-
-
     }
 
 }
